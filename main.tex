@@ -1,0 +1,173 @@
+%Definimos la clase del documento y cargamos las librerías
+\documentclass[a4paper]{report}
+\usepackage{graphicx}
+\usepackage[utf8]{inputenc}
+%paquetes para la portada azul
+\usepackage{afterpage}
+\usepackage{xcolor}
+%Hipervinculos para todo lo útil
+\usepackage{hyperref}
+\usepackage{fancyhdr}
+%evitamos que rompa las palabras
+\usepackage[none]{hyphenat}
+%añadir ficheros externos
+\usepackage{subfiles}
+%soporte para anexos
+\usepackage{appendix}
+%importacion automatica de codigo en los anexos
+\usepackage{minted}
+%paquetes para figuras
+\usepackage{caption}
+\usepackage{subcaption}
+%bibliografía
+\usepackage{biblatex}
+\addbibresource{TFG.bib} 
+%Encabezados bonitos
+\pagestyle{headings}
+
+%paquete para poner la bibliografia en la table of contents
+\usepackage[nottoc,notlot,notlof]{tocbibind}
+
+%Cambiamos el espacio en blanco enorme que por defecto hay en las páginas inicio de capítulo
+\usepackage{titlesec}
+\titleformat{\chapter}[display]   
+{\normalfont\huge\bfseries}{\chaptertitlename\ \thechapter}{20pt}{\Huge}   
+\titlespacing*{\chapter}{0pt}{-50pt}{40pt}
+
+%para crear subsubsubsection
+\setcounter{secnumdepth}{4}
+\titleformat{\paragraph}
+{\normalfont\normalsize\bfseries}{\theparagraph}{1em}{}
+\titlespacing*{\paragraph}
+{0pt}{3.25ex plus 1ex minus .2ex}{1.5ex plus .2ex}
+
+%definimos el azul celeste
+\definecolor{AzulCeleste}{RGB}{31, 130, 192}
+
+%Ruta en la que pondremos las imágenes para el documento
+\graphicspath{ {figures/} }
+%Redifinimos el nombre que asigna babel spanish a las tablas (cuadro) a tabla
+% \renewcommand{\spanishtablename}{Tabla}
+% \renewcommand{\spanishlisttablename}{Índice de tablas}
+% \renewcommand{\spanishcontentsname}{Índice}
+% \renewcommand{\appendixname}{Anexos}
+% \renewcommand{\appendixtocname}{Anexos}
+% \renewcommand{\appendixpagename}{Anexos}
+
+% % Definimos el comando de página en blanco
+\newcommand\blankpage{%
+    \null
+    \thispagestyle{empty}%
+    \newpage}
+
+% % Definimos el comando de página en blanco sin avanzar numeracion
+% \newcommand\paginablancosin{%
+%     \paginablanco{}
+%     \addtocounter{page}{-1}}
+
+%mayor anchura en las tablas
+\renewcommand{\arraystretch}{1.5}
+%mayor ancuhura en las fracciones
+\newcommand\ddfrac[2]{\frac{\displaystyle #1}{\displaystyle #2}}
+%coamdno escribir TFG
+% \newcommand{\tfg}{Trabajo Fin de Grado }
+
+
+% Comenzamos el documento
+\begin{document}
+% Hacemos la portada
+\begin{titlepage}
+\pagecolor{AzulCeleste}\afterpage{\nopagecolor}
+
+\begin{figure}[!htb]
+   \begin{minipage}{0.5\textwidth}
+     \centering
+     \includegraphics[width=1\textwidth]{figures/logo_upm_bn.png}
+   \end{minipage}\hfill
+   \begin{minipage}{0.5\textwidth}
+     \centering
+     \includegraphics[width=1\textwidth]{figures/logo_etsisi_bn.png}
+   \end{minipage}
+\end{figure}
+
+%{\includegraphics[width=0.5\textwidth]{logo_etsisi_bn.png}\par}
+{\bfseries\Huge \textcolor{white}{Title project} \par}
+\vfill
+{\Large \textcolor{white}{End of Degree Project} \par}
+\vfill
+{\Large \textcolor{white}{Degree in Ciencia de Datos e Inteligencia Artificial} \par} % CAMBIAR
+\vfill
+{\Large \textcolor{white}{Author:} \par}
+{\Large \textcolor{white}{David Ren Larrumbide Lin} \par}
+\vfill
+{\Large \textcolor{white}{Tutors:} \par}
+{\Large \textcolor{white}{Rodrigo Raya} \par}
+\vfill
+{\Large \textcolor{white}{Date} \par}
+\newpage
+
+\thispagestyle{empty}
+\centering % Para centrar la portada
+% Para entender los siguientes comandos, consúltese los siguientes enlaces
+% https://manualdelatex.com/tutoriales/crear-una-portada
+% https://manualdelatex.com/tutoriales/tipo-de-letra
+{\scshape\Large  Universidad Politécnica de Madrid \par} % CAMBIAR
+{\scshape\Large Escuela Técnica Superior de Ingeniería de Sistemas Informáticos \par}
+\vfill
+{\includegraphics[width=1\textwidth]{figures/logo_etsisi.png}\par}
+\vfill
+{\bfseries\LARGE Reasoning Models: ARC-AGI II \par}
+\vfill
+{\Large End of Degree Project\par}
+\vfill
+{\Large Degree in Ciencia de Datos e Inteligencia Artificial \par}
+\vfill
+{\Large Academic Year 2025 \par}
+\vfill
+{\Large Author: \par}
+{\Large David Ren Larrumbide Lin \par}
+\vfill
+{\Large Tutors: \par}
+{\Large Rodrigo Raya \par}
+
+\end{titlepage}
+
+\pagenumbering{Roman} % para comenzar la numeracion de paginas en numeros romanos
+
+% Agradecimientos
+\chapter*{}
+\thispagestyle{empty}
+\addcontentsline{toc}{section}{Acknowledgements} % si queremos que aparezca en el índice
+\begin{flushright}
+\textit{right here}
+\end{flushright}
+
+
+\chapter*{Summary} % si no queremos que añada la palabra "Capitulo"
+\addcontentsline{toc}{section}{Summary} % si queremos que aparezca en el índice
+To do
+\chapter*{Abstract} % si no queremos que añada la palabra "Capitulo"
+\addcontentsline{toc}{section}{Abstract} % si queremos que aparezca en el índice
+To do
+
+\tableofcontents
+\newpage
+\listoftables %ver si hay alguna tabla al final
+\newpage
+\listoffigures
+\newpage
+
+\subfile{sections/On the measure of intelligence.tex}
+
+% \chapter{Introduction}
+% \pagenumbering{arabic}
+% \chapter{State of the art}
+% \chapter{Proyect development}
+% \chapter{Results}
+% \chapter{Conclusions and future reference}
+% \printbibliography
+
+
+
+
+\end{document}
